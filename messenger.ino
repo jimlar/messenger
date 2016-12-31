@@ -15,7 +15,6 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-#include <ArduinoJson.h>
 
 Adafruit_8x16minimatrix matrix = Adafruit_8x16minimatrix();
 
@@ -36,7 +35,7 @@ ESP8266WebServer server ( 80 );
 
 
 void handleGetRequest() {
-  server.send(200, "text/plain", "Post your message (as a plain post body, no encoding)");
+  server.send(200, "text/plain", "PUT your message (as a plain body, no encoding)");
 }
 
 void handlePostRequest() {
@@ -68,7 +67,7 @@ void setup() {
     scroll_once();
   }
 
-  set_led_text(String("Connected as ") + WiFi.localIP().toString());
+  set_led_text(String("PUT message to http://") + WiFi.localIP().toString() + String(":80/"));
   scroll_once();
   
   server.on("/", HTTP_GET, handleGetRequest);
